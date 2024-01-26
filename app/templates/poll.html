@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poll</title>
+</head>
+<body>
+
+<form action="/poll">
+    {% for ques in data %}
+        {% if ques.question %}
+            <h1>{{ ques.question }}</h1>
+            {% set answers = ques.answers.split(',') %}
+            {% set index = loop.index %}
+            {% for answer in answers %}
+                <input type="radio" name="field{{index}}_{{ques.question}}" value="{{ answer }}"> {{ answer }}  <br>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    <input type="number" name="numberOfQues" value="{{number_of_ques}}" style="display: none"/>
+    <input type="submit" value="Vote"/>
+
+</form>
+</body>
+</html>
